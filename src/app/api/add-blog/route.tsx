@@ -1,7 +1,7 @@
 import connectToDb from "@/app/database";
+import Blog from "@/app/models";
 import Joi from "joi";
 import { NextResponse } from "next/server";
-import Blog
 
 
 
@@ -29,6 +29,17 @@ export async function Post(req:Request){
         })
       }
       const newlyCreatedBlogItem=await Blog.create(extractBlogData);
+      if(newlyCreatedBlogItem){
+        return NextResponse.json({
+            success:true,
+            message:"data created successfully"
+        })
+      }else{
+        return NextResponse.json({
+            success:false,
+            message:'Something went wrong ! Please try again'
+          })
+      }
 
 
 
